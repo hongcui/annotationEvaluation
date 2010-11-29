@@ -6,6 +6,7 @@ import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
 /**
+ * Used for Alyssa's annotation
  * This class can be used to split one xml file with multiple sentences into different xml files. The names for new xml files are taken 
  * from the sentence_id field.
  */

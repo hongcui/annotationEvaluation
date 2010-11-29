@@ -11,6 +11,7 @@ import org.jdom.Element;
 import org.jdom.input.SAXBuilder;
 
 /**
+ * Used for Edward's annotation.
  * This class is used to split the xml file when a range of sentences are given. The name of the file to be stored is taken from the database.
  */
 
