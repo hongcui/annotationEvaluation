@@ -30,9 +30,11 @@ public class SplitFromOneFile {
 		List testli = testroot.getChildren("statement");
 
 		for (int j = 0; j <= testli.size(); j++) {
-			if (j == testli.size() / 2)
+			/*if (j == testli.size() / 2)
 				j = 0;
 			if (testli.size() == 1)
+				j = 0;*/
+			if (testli.size() - j <= 2)
 				j = 0;
 
 			Element statement = (Element) testli.get(j);
