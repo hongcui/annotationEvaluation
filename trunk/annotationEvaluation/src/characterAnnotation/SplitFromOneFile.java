@@ -27,30 +27,24 @@ public class SplitFromOneFile {
 
 		SAXBuilder builder = new SAXBuilder();
 		Document testcase = builder
-				.build("C:\\RA\\Comparator\\character-annotations-manual-treatise\\character-annotations-manual-treatise\\treatise-annotation-Alyssa.xml");
+				.build("Z:\\DATA\\TESTDATA-character-anno\\character-annotations-manual-treatise\\treatise-annotation-Alyssa.xml");
 		Element testroot = testcase.getRootElement();
 		List testli = testroot.getChildren("statement");
 
-		for (int j = 0; j <= testli.size(); j++) {
-			/*if (j == testli.size() / 2)
-				j = 0;
-			if (testli.size() == 1)
-				j = 0;*/
-			if (testli.size() - j <= 2)
-				j = 0;
-
+		for (int j = 0; j < testli.size(); j++) {
 			Element statement = (Element) testli.get(j);
-			Attribute id = statement.getAttribute("id");
-			statement.detach();
+			Element statecopy = (Element)statement.clone();
+			Attribute id = statecopy.getAttribute("id");
+			statecopy.detach();
 
 			String source = id.getValue();
 
 			File f = new File(
-					"C:\\RA\\Comparator\\character-annotations-manual-treatise\\combined\\"
+					"Z:\\DATA\\TESTDATA-character-anno\\character-annotations-manual-treatise\\normalized-alyssa\\"
 							+ source + ".xml");
 
 			Element desc = new Element("description");
-			desc.addContent(statement);
+			desc.addContent(statecopy);
 			ParsingUtil.outputXML(desc, f);
 
 		}
