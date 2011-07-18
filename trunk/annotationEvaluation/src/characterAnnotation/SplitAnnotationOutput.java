@@ -111,18 +111,18 @@ public class SplitAnnotationOutput {
 	 */
 	public static void main(String[] args) {
 		
-		/*
+		
 		String annotation = "C:\\Documents and Settings\\Hong Updates\\Desktop\\temp\\fna-annotation-new-complete.txt";
 		String outdir ="C:\\DATA\\evaluation\\fnav19\\UnsupervisedStanford_Benchmark_sentence";
 		String selectdir = "C:\\DATA\\evaluation\\fnav19\\UnsupervisedStanford_Benchmark_selected_sentence";
 		String answerdir = "C:\\DATA\\evaluation\\fnav19\\AnsKey_Benchmark_selected_sentence";
-		*/
 		
+		/*
 		String annotation = "C:\\Documents and Settings\\Hong Updates\\Desktop\\temp\\treatise-annotation-new-complete.txt";
 		String outdir ="C:\\DATA\\evaluation\\treatise\\UnsupervisedStanford_Benchmark_sentence";
 		String selectdir = "C:\\DATA\\evaluation\\treatise\\UnsupervisedStanford_Benchmark_selected_sentence";
 		String answerdir = "C:\\DATA\\evaluation\\treatise\\AnsKey_Benchmark_selected_sentence";
-		
+		*/
 		SplitAnnotationOutput sao = new SplitAnnotationOutput(annotation, outdir, selectdir, answerdir);
 		sao.split();
 		sao.select();		
