@@ -29,7 +29,7 @@ public class SplitAnnotationOutput {
 		this.answerdir = answerdir;
 	}
 	
-	private void split(){
+	public void split(){
 		try{
 		    FileInputStream fstream = new FileInputStream(annotation);
 		    DataInputStream in = new DataInputStream(fstream);
@@ -68,7 +68,7 @@ public class SplitAnnotationOutput {
 	/**
 	 * use the answerdir to select xml files for evaluation
 	 */
-	private void select(){
+	public void select(){
 		File answerdir = new File(this.answerdir);
 		File[] alist = answerdir.listFiles();
 		for(int i = 0; i<alist.length; i++){
