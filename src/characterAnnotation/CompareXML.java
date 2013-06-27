@@ -295,7 +295,9 @@ public class CompareXML {
 			}
 		}
 
+		
 		if(myansli!=null && mytestli!=null){
+			
 			for(Iterator tli = mytestli.iterator(); tli.hasNext();){
 				testli = (List)tli.next();
 				for(int i = 0; i < testli.size(); i++){
@@ -310,28 +312,30 @@ public class CompareXML {
 							//System.out.println(test.getParentElement().getAttributeValue("id"));
 							//System.out.println(ans.getParentElement().getAttributeValue("id"));
 							//find matching structure
-							if (test.getParentElement().getAttributeValue("name").compareTo(ans.getParentElement().getAttributeValue("name"))==0){
-								List testattr = test.getAttributes();
-								List ansattr = ans.getAttributes(); //ans: a character element; ansattr: att/value pairs
-								for(Iterator k = testattr.iterator(); k.hasNext();){
-									Attribute a = (Attribute)k.next();
-									//System.out.println(ansattr.toString());
-									//System.out.println(a.toString());
-									if(a.getName().compareTo("name")==0||a.getName().compareTo("value")==0||a.getName().compareTo("char_type")==0||a.getName().compareTo("modifier")==0||a.getName().compareTo("from")==0||a.getName().compareTo("to")==0||a.getName().compareTo("from_unit")==0||a.getName().compareTo("to_unit")==0||a.getName().compareTo("unit")==0){
-										if(!ansattr.toString().contains(a.toString())){
-											flag = 1; //1: not perfect match
-											break;//?
+							if(!ansliexact.contains(ans.getParentElement().getAttributeValue("id") + ans.getAttributes().toString())){
+								if (test.getParentElement().getAttributeValue("name").compareTo(ans.getParentElement().getAttributeValue("name"))==0){
+									List testattr = test.getAttributes();
+									List ansattr = ans.getAttributes(); //ans: a character element; ansattr: att/value pairs
+									for(Iterator k = testattr.iterator(); k.hasNext();){
+										Attribute a = (Attribute)k.next();
+										//System.out.println(ansattr.toString());
+										//System.out.println(a.toString());
+										if(a.getName().compareTo("name")==0||a.getName().compareTo("value")==0||a.getName().compareTo("char_type")==0||a.getName().compareTo("modifier")==0||a.getName().compareTo("from")==0||a.getName().compareTo("to")==0||a.getName().compareTo("from_unit")==0||a.getName().compareTo("to_unit")==0||a.getName().compareTo("unit")==0){
+											if(!ansattr.toString().contains(a.toString())){
+												flag = 1; //1: not perfect match
+												break;//?
+											}
 										}
 									}
-								}
-								if(flag == 0){
-									charexactmatch++;
-									if(test.getAttributes().size() == ans.getAttributes().size())
-										charperfmatch++;
-									exact += test.getAttributes().toString();
-									ansliexact += ans.getAttributes().toString();
-									aliflag = 1;
-									break;
+									if(flag == 0){
+										charexactmatch++;
+										if(test.getAttributes().size() == ans.getAttributes().size())
+											charperfmatch++;
+										exact += test.getParentElement().getAttributeValue("id") + test.getAttributes().toString();
+										ansliexact += ans.getParentElement().getAttributeValue("id") + ans.getAttributes().toString();
+										aliflag = 1;
+										break;
+									}
 								}
 							}
 						}
@@ -346,14 +350,14 @@ public class CompareXML {
 				for(int i = 0; i < testli.size(); i++){
 					int flag = 0;
 					Element test = (Element)testli.get(i);
-					if(!exact.contains(test.getAttributes().toString())){
+					if(!exact.contains(test.getParentElement().getAttributeValue("id") + test.getAttributes().toString())){
 						for(Iterator ali = myansli.iterator(); ali.hasNext();){
 							int aliflag = 0;
 							ansli = (List)ali.next();
 							for(int j = 0; j < ansli.size(); j++){
 								int ansliflag = 0;
 								Element ans = (Element)ansli.get(j);
-								if(!ansliexact.contains(ans.getAttributes().toString())){
+								if(!ansliexact.contains(ans.getParentElement().getAttributeValue("id") + ans.getAttributes().toString())){
 									if (test.getParentElement().getAttributeValue("name").compareTo(ans.getParentElement().getAttributeValue("name"))==0){
 										List testattr = test.getAttributes();
 										List ansattr = ans.getAttributes();//one character element
@@ -390,7 +394,7 @@ public class CompareXML {
 										}
 										if((ansliflag == 0 && missattr == 1) || goodv || (goodf && goodt)){
 											charpartmatch++;
-											ansliexact += ans.getAttributes().toString();
+											ansliexact += ans.getParentElement().getAttributeValue("id") + ans.getAttributes().toString();
 											flag = 1;
 											aliflag = 1;
 											break;
