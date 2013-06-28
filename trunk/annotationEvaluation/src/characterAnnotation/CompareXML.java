@@ -312,8 +312,15 @@ public class CompareXML {
 							//System.out.println(test.getParentElement().getAttributeValue("id"));
 							//System.out.println(ans.getParentElement().getAttributeValue("id"));
 							//find matching structure
+							
+							
+							Element ansParent = ans.getParentElement();
+							Element testParent = test.getParentElement();
+							String constraintTestParent = testParent.getAttributeValue("constraint");
+							String constraintAnsParent = ansParent.getAttributeValue("constraint");
+							boolean perfectParentStructureMatch = constraintTestParent.compareTo(constraintAnsParent)==0 && ansParent.getAttributeValue("name").equals(testParent.getAttributeValue("name"));		
 							if(!ansliexact.contains(ans.getParentElement().getAttributeValue("id") + ans.getAttributes().toString())){
-								if (test.getParentElement().getAttributeValue("name").compareTo(ans.getParentElement().getAttributeValue("name"))==0){
+								if (perfectParentStructureMatch){
 									List testattr = test.getAttributes();
 									List ansattr = ans.getAttributes(); //ans: a character element; ansattr: att/value pairs
 									for(Iterator k = testattr.iterator(); k.hasNext();){
@@ -418,7 +425,7 @@ public class CompareXML {
 			System.out.println("charnomatch:"+charnomatch);*/
 		}
 	}
-	
+
 	/**
 	 * Performs comparison between the <relation> elements present in machine & human annotated sentence.
 	 * @param ansroot
